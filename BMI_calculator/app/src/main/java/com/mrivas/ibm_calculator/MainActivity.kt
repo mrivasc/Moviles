@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var showBMI:TextView
     private lateinit var weight_class_txt:TextView
     private lateinit var sub_text:TextView
+    private lateinit var clearData_button:Button
 
     private var weight = 0.00
     private var height = 0.00
@@ -34,15 +35,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun bind() {
-        weight_input = findViewById<EditText>(R.id.weight_input)
-        height_input = findViewById<EditText>(R.id.height_input)
-        calculate_button = findViewById<Button>(R.id.btn_calculate)
-        showBMI = findViewById<TextView>(R.id.show_bmi)
-        weight_class_txt = findViewById<TextView>(R.id.txt_weight_class)
-        sub_text = findViewById<TextView>(R.id.sub_text)
+        weight_input = findViewById(R.id.weight_input)
+        height_input = findViewById(R.id.height_input)
+        calculate_button = findViewById(R.id.btn_calculate)
+        showBMI = findViewById(R.id.show_bmi)
+        weight_class_txt = findViewById(R.id.txt_weight_class)
+        sub_text = findViewById(R.id.sub_text)
+        clearData_button = findViewById(R.id.btn_clearData)
     }
 
     private fun addListener() {
+        // Calculate button
         calculate_button.setOnClickListener {
             if(isEmpty(weight_input, height_input)) {
                 return@setOnClickListener
@@ -71,6 +74,15 @@ class MainActivity : AppCompatActivity() {
             weight_class_txt.setTextColor(ContextCompat.getColor(this, color))
             sub_text.text = "(Normal range is 18.5 - 24)"
             showBMI.text = bmi.toString()
+        }
+
+        // Clear data button
+        clearData_button.setOnClickListener {
+            weight_input.text.clear()
+            height_input.text.clear()
+            showBMI.text = ""
+            weight_class_txt.text = ""
+            sub_text.text = ""
         }
     }
 
